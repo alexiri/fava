@@ -56,7 +56,10 @@ export default class EntryForm {
 
     $$('.metadata-row', this.form).forEach((row) => {
       const key = row.querySelector('.metadata-key').value;
-      entryData.meta[key] = row.querySelector('.metadata-value').value;
+      // Filter internal metadata keys
+      if (! (key.startsWith('__') && key.endsWith('__')) ) {
+        entryData.meta[key] = row.querySelector('.metadata-value').value;
+      }
     });
 
     if (this.type === 'Transaction') {
